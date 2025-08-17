@@ -1,5 +1,4 @@
 "use client";
-import React, { Suspense } from "react";
 import Sidebar from "@/components/Sidebar";
 import ProductCard from "@/components/ProductCard";
 import { useFilter } from "@/context/FilterContext";

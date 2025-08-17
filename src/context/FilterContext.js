@@ -11,6 +11,7 @@ export const FilterProvider = ({ children }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  // State initialized from the URL on first load.
   const [searchTerm, setSearchTerm] = useState(
     searchParams.get("search") || ""
   );
@@ -24,9 +25,10 @@ export const FilterProvider = ({ children }) => {
     Number(searchParams.get("price")) || 1000
   );
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+  // Debounce the search term to prevent excessive URL updates and re-renders.
+  const debouncedSearchTerm = useDebounce(searchTerm, 800);
 
-  //  URL sync effect
+  // effect syncs the UI state to the URL after changes.
   useEffect(() => {
     const params = new URLSearchParams();
     if (debouncedSearchTerm) params.set("search", debouncedSearchTerm);
@@ -43,22 +45,26 @@ export const FilterProvider = ({ children }) => {
     router,
   ]);
 
-  // filtering logic
   const filteredProducts = useMemo(() => {
+    const currentSearch = searchParams.get("search") || "";
+    const currentCategories = searchParams.getAll("category");
+    const currentBrands = searchParams.getAll("brand");
+    const currentPrice = Number(searchParams.get("price")) || 1000;
+
     return mockProducts.filter((product) => {
       const matchesSearch = product.title
         .toLowerCase()
-        .includes(debouncedSearchTerm.toLowerCase());
+        .includes(currentSearch.toLowerCase());
       const matchesCategory =
-        selectedCategories.length === 0 ||
-        selectedCategories.includes(product.category);
+        currentCategories.length === 0 ||
+        currentCategories.includes(product.category);
       const matchesBrand =
-        selectedBrands.length === 0 || selectedBrands.includes(product.brand);
-      const matchesPrice = product.price <= priceRange;
+        currentBrands.length === 0 || currentBrands.includes(product.brand);
+      const matchesPrice = product.price <= currentPrice;
 
       return matchesSearch && matchesCategory && matchesBrand && matchesPrice;
     });
-  }, [debouncedSearchTerm, selectedCategories, selectedBrands, priceRange]);
+  }, [searchParams]); // makes URL the single source of truth for filtered data
 
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) =>
@@ -77,7 +83,6 @@ export const FilterProvider = ({ children }) => {
   const value = {
     searchTerm,
     setSearchTerm,
-    debouncedSearchTerm,
     selectedCategories,
     handleCategoryChange,
     selectedBrands,
