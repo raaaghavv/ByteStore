@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-accent text-white">
+    <footer className="bg-accent text-white mx-auto">
       <div className="max-w-[1440px] mx-auto p-6 pt-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
         <div className="flex flex-col gap-4">
           <h3 className="font-semibold">Filters</h3>
@@ -25,13 +25,13 @@ const Footer = () => {
         <div className="flex flex-col gap-4">
           <h3 className="font-semibold">Follow Us</h3>
           <div className="flex items-center gap-3">
-            <a href="#" className="bg-brand p-2 rounded-full hover:bg-brand/80">
+            <a className="bg-brand p-2 rounded-full hover:bg-brand/80">
               <Facebook size={18} />
             </a>
-            <a href="#" className="bg-brand p-2 rounded-full hover:bg-brand/80">
+            <a className="bg-brand p-2 rounded-full hover:bg-brand/80">
               <Twitter size={18} />
             </a>
-            <a href="#" className="bg-brand p-2 rounded-full hover:bg-brand/80">
+            <a className="bg-brand p-2 rounded-full hover:bg-brand/80">
               <Instagram size={18} />
             </a>
           </div>
