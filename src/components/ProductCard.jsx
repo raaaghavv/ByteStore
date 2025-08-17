@@ -1,24 +1,35 @@
 import React from "react";
+import Link from "next/link";
+import { useCart } from "../context/CartContext";
+import Image from "next/image";
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    alert(`${product.title} has been added to the cart!`);
+  };
+
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm flex flex-col gap-3 justify-between">
-      {/* Product Image */}
-      <img
-        src={product.image}
-        alt={product.title}
-        className="w-full h-40 object-cover rounded"
-      />
+      <Link href={`/product/${product.id}`}>
+        <Image
+          src={product.images[0]}
+          alt={product.title}
+          width={500}
+          height={300}
+          className="w-full h-60 object-contain rounded cursor-pointer"
+        />
+        <div className="space-y-1 mt-3">
+          <h3 className="text-sm font-medium">{product.title}</h3>
+          <p className="font-semibold">${product.price}</p>
+        </div>
+      </Link>
 
-      {/* Title & Price */}
-      <div className="space-y-1">
-        <h3 className="text-sm font-medium">{product.title}</h3>
-        <p className="font-semibold">${product.price}</p>
-      </div>
-
-      {/* Add to Cart Button */}
       <button
-        className=" bg-brand text-white px-4 py-2 rounded-xl hover:bg-accent"
+        onClick={handleAddToCart}
+        className="bg-brand text-white px-4 py-2 rounded-xl hover:bg-accent"
       >
         Add to Cart
       </button>
