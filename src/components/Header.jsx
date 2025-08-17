@@ -2,12 +2,15 @@
 import Link from "next/link";
 import React from "react";
 import { useCart } from "@/context/CartContext";
+import { useFilter } from "@/context/FilterContext";
 
 const Header = () => {
   const { cartItems } = useCart();
+  const { searchTerm, setSearchTerm } = useFilter();
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
-    <header className="sticky top-0 flex items-center justify-center bg-brand w-full z-90">
+    <header className="sticky top-0 flex items-center justify-center bg-brand w-full z-50">
       <div className="flex items-center justify-between max-w-[1440px] w-full mx-4 sm:mx-6 py-4">
         <Link href={"/"} className="text-white text-3xl font-bold px-3 py-1">
           Logo
@@ -16,6 +19,8 @@ const Header = () => {
         <input
           type="text"
           placeholder="Search for products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="min-w-25 w-5/12 px-2 py-2.5 rounded-lg border border-white/70 text-white text-sm bg-transparent focus:outline-none"
         />
         <Link
