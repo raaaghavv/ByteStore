@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# E-Commerce Frontend - Whatbytes Assignment
 
-## Getting Started
+A modern, responsive e-commerce storefront built with Next.js and Tailwind CSS. This project showcases a complete user journey from browsing and filtering products to managing a shopping cart.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Live Demo & Preview
+
+- [**Live Site**](https://bytes-store.vercel.app/)
+- [**Video Walkthrough**](https://www.loom.com/share/your-video-link)
+
+![E-Commerce Store Screenshot](/public/screenshot.png)
+_A screenshot of the main product listing page._
+
+---
+
+## ✨ Features
+
+This application is packed with features designed to provide a seamless and intuitive shopping experience.
+
+- **Responsive Design:** Fully responsive layout that looks great on desktop, tablet, and mobile devices.
+- **Product Listing:** A clean, grid-based display of all available products.
+- **Advanced Filtering System:**
+  - **Debounced Live Search:** Instantly search for products by title with a debounced input for optimal performance.
+  - **Category & Brand Filtering:** Refine the product list by selecting multiple categories and brands.
+  - **Price Range Slider:** Dynamically filter products based on a maximum price.
+- **URL-Based State:** All active filters (search, category, brand, price) are reflected in the URL, allowing for shareable and bookmarkable links.
+- **Dynamic Product Pages:** Each product has its own dedicated, server-rendered page with a unique URL (`/product/[id]`).
+- **Image Carousel:** An interactive image gallery on the product detail page.
+- **Stateful Shopping Cart:**
+  - **Add to Cart:** Add products from both the listing and detail pages.
+  - **Quantity Management:** Update item quantities directly in the cart.
+  - **Remove Items:** Easily remove products from the cart.
+  - **Persistent State:** The cart's contents are saved to `localStorage`, so it persists between sessions.
+- **User-Friendly Notifications:** Non-intrusive toast messages for actions like adding items to the cart, powered by `react-hot-toast`.
+- **Global State Management:** Uses React Context API with a `useReducer` pattern for robust and predictable state management.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Language:** JavaScript
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **State Management:** [React Context API](https://react.dev/learn/passing-data-deeply-with-context) (with `useReducer`)
+- **Notifications:** [react-hot-toast](https://react-hot-toast.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Deployment:** [Vercel](https://vercel.com/)
+
+---
+
+## ⚙️ Installation and Setup
+
+To run this project locally, follow these simple steps:
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/raaaghavv/ByteStore
+    ```
+
+2.  **Navigate to the project directory:**
+
+    ```bash
+    cd ByteStore
+    ```
+
+3.  **Install dependencies:**
+
+    ```bash
+    npm install
+    # or
+    # yarn install
+    ```
+
+4.  **Run the development server:**
+
+    ```bash
+    npm run dev
+    # or
+    # yarn dev
+    ```
+
+5.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+---
+
+## 📂 Project Structure
+
+The project is organized with a clear and scalable structure:
+
+```
+/
+├── public/               # Static assets (images)
+├── src/
+│   ├── app/              # Next.js App Router (home, product, cart pages)
+│   ├── components/       # Reusable React components (Header, Sidebar, etc.)
+│   ├── context/          # Global state management (CartContext, FilterContext)
+│   ├── data/             # Mock data for products
+│   └── hooks/            # Custom hooks (useDebounce)
+├── .gitignore
+├── next.config.mjs
+├── package.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📧 Contact
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Raghav Goel – [work.raghav01@gmail.com](mailto:work.raghav01@gmail.com)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Project Link: [https://github.com/raaaghavv/ByteStore](https://github.com/raaaghavv/ByteStore)
