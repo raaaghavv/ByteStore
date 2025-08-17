@@ -27,9 +27,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CartProvider>
-          <FilterProvider>
-            <Header />
-          </FilterProvider>
+          <Suspense fallback={<></>}>
+            <FilterProvider>
+              <Header />
+            </FilterProvider>
+          </Suspense>
           {children}
           <Footer />
         </CartProvider>
