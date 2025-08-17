@@ -2,7 +2,8 @@
 
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import mockProducts from "../data/products"; 
+import mockProducts from "../data/products";
+import { useDebounce } from "@/hooks/useDebounce";
 
 const FilterContext = createContext();
 
@@ -10,7 +11,6 @@ export const FilterProvider = ({ children }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // 1. All state is now managed here
   const [searchTerm, setSearchTerm] = useState(
     searchParams.get("search") || ""
   );
@@ -24,7 +24,9 @@ export const FilterProvider = ({ children }) => {
     Number(searchParams.get("price")) || 1000
   );
 
-  // 2. The URL synchronization effect is now here
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+
+  //  URL sync effect
   useEffect(() => {
     const params = new URLSearchParams();
     if (searchTerm) params.set("search", searchTerm);
@@ -33,9 +35,15 @@ export const FilterProvider = ({ children }) => {
     if (priceRange < 1000) params.set("price", priceRange);
 
     router.replace(`/?${params.toString()}`);
-  }, [searchTerm, selectedCategories, selectedBrands, priceRange, router]);
+  }, [
+    debouncedSearchTerm,
+    selectedCategories,
+    selectedBrands,
+    priceRange,
+    router,
+  ]);
 
-  // 3. The filtering logic (useMemo) is now here
+  // filtering logic
   const filteredProducts = useMemo(() => {
     return mockProducts.filter((product) => {
       const matchesSearch = product.title
@@ -50,7 +58,7 @@ export const FilterProvider = ({ children }) => {
 
       return matchesSearch && matchesCategory && matchesBrand && matchesPrice;
     });
-  }, [searchTerm, selectedCategories, selectedBrands, priceRange]);
+  }, [debouncedSearchTerm, selectedCategories, selectedBrands, priceRange]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) =>
@@ -69,6 +77,7 @@ export const FilterProvider = ({ children }) => {
   const value = {
     searchTerm,
     setSearchTerm,
+    debouncedSearchTerm,
     selectedCategories,
     handleCategoryChange,
     selectedBrands,
