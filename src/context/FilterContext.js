@@ -29,7 +29,7 @@ export const FilterProvider = ({ children }) => {
   //  URL sync effect
   useEffect(() => {
     const params = new URLSearchParams();
-    if (searchTerm) params.set("search", searchTerm);
+    if (debouncedSearchTerm) params.set("search", debouncedSearchTerm);
     selectedCategories.forEach((cat) => params.append("category", cat));
     selectedBrands.forEach((brand) => params.append("brand", brand));
     if (priceRange < 1000) params.set("price", priceRange);
@@ -48,7 +48,7 @@ export const FilterProvider = ({ children }) => {
     return mockProducts.filter((product) => {
       const matchesSearch = product.title
         .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+        .includes(debouncedSearchTerm.toLowerCase());
       const matchesCategory =
         selectedCategories.length === 0 ||
         selectedCategories.includes(product.category);
