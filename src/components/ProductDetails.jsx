@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProductDetails = ({ product, className }) => {
   const { addToCart } = useCart();
@@ -8,7 +9,7 @@ const ProductDetails = ({ product, className }) => {
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
-    alert(`${product.title} has been added to the cart!`);
+    toast.success("Added to Cart");
   };
   return (
     <section className={className}>
@@ -18,8 +19,7 @@ const ProductDetails = ({ product, className }) => {
       </h1>
 
       <p className="text-sm text-gray-600 ">
-        <span className="font-medium">Category:</span>{" "}
-        {product.category}
+        <span className="font-medium">Category:</span> {product.category}
       </p>
 
       <p className="text-gray-700 leading-relaxed ">{product.description}</p>
@@ -51,6 +51,7 @@ const ProductDetails = ({ product, className }) => {
       >
         Add to Cart
       </button>
+      <Toaster position="top-right" reverseOrder={false} />
     </section>
   );
 };

@@ -2,13 +2,14 @@ import React from "react";
 import Link from "next/link";
 import { useCart } from "../context/CartContext";
 import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
     addToCart(product);
-    alert(`${product.title} has been added to the cart!`);
+    toast.success("Added to Cart");
   };
 
   return (
@@ -33,6 +34,7 @@ const ProductCard = ({ product }) => {
       >
         Add to Cart
       </button>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };
