@@ -19,7 +19,7 @@ const ProductDetailPage = () => {
   }
 
   return (
-    <main className="flex flex-col max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8">
+    <main className="flex flex-col max-w-[1440px] min-h-screen mx-auto p-4 sm:p-6 lg:p-8">
       <div className="flex p-4 sm:p-8 flex-col md:flex-row gap-12 items-center md:items-start">
         <ImageCarousel
           product={product}
