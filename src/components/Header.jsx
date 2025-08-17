@@ -23,11 +23,15 @@ const Header = () => {
           className="bg-accent text-white px-4 sm:px-6 py-2.5 rounded flex items-center gap-1 whitespace-nowrap"
         >
           🛒 Cart
-          <sup>
-            <span className=" bg-red-500 text-white text-center rounded-full aspect-square px-1.5 py-1">
-              {totalItems > 0 ? totalItems : ""}
-            </span>
-          </sup>
+          {totalItems > 0 ? (
+            <sup>
+              <span className=" bg-red-500 text-white text-center rounded-full aspect-square px-1.5 py-1">
+                {totalItems}
+              </span>
+            </sup>
+          ) : (
+            ""
+          )}
         </Link>
       </div>
     </header>
