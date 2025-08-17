@@ -4,9 +4,15 @@ import Link from "next/link";
 import { useCart } from "../../context/CartContext";
 import { Trash2, Plus, Minus } from "lucide-react";
 import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 
 const CartPage = () => {
-  const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const { cartItems, updateQuantity, removeFromCart, checkOutCart } = useCart();
+
+  const checkOut = () => {
+    checkOutCart();
+    toast.success("Order Placed Successfully");
+  };
 
   // Calculate total price
   const subtotal = cartItems.reduce(
@@ -25,7 +31,7 @@ const CartPage = () => {
   return (
     <main className="flex flex-col max-w-[1440px] min-h-screen mx-auto p-4 sm:p-6 lg:p-8">
       {cartItems.length === 0 ? (
-        // --- Empty cart page ---
+        // Empty cart page
         <div className="flex flex-col gap-8 text-center mt-16">
           <p className="text-gray-600 text-4xl">Your cart is empty.</p>
           <Link
@@ -125,13 +131,17 @@ const CartPage = () => {
                   <span>${total.toFixed(2)}</span>
                 </div>
               </div>
-              <button className="w-full mt-6 bg-brand text-white py-3 rounded-md font-semibold hover:bg-accent transition-colors text-lg">
+              <button
+                onClick={checkOut}
+                className="w-full mt-6 bg-brand text-white py-3 rounded-md font-semibold hover:bg-accent transition-colors text-lg"
+              >
                 Proceed to Checkout
               </button>
             </div>
           </div>
         </>
       )}
+      <Toaster position="top-right" reverseOrder={false} />
     </main>
   );
 };
