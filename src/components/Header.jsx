@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { useCart } from "@/context/CartContext";
 import { useFilter } from "@/context/FilterContext";
+import { Search } from "lucide-react";
 
 const Header = () => {
   const { cartItems } = useCart();
@@ -16,13 +17,18 @@ const Header = () => {
           Logo
         </Link>
 
-        <input
-          type="text"
-          placeholder="Search for products..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="min-w-25 w-5/12 px-2 py-2.5 rounded-lg border border-white/70 text-white text-sm bg-transparent focus:outline-none"
-        />
+        <div className="relative w-5/12">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white opacity-70 pointer-events-none">
+            <Search size={18} />
+          </span>
+          <input
+            type="text"
+            placeholder="Search for products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10 pr-2 py-2.5 rounded-lg border border-white/70 text-white text-sm bg-transparent focus:outline-none w-full"
+          />
+        </div>
         <Link
           href={"/cart"}
           className="bg-accent text-white px-4 sm:px-6 py-2.5 rounded flex items-center gap-1 whitespace-nowrap"
