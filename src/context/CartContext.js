@@ -65,6 +65,11 @@ const cartReducer = (state, action) => {
         ),
       };
 
+    case "CHECKOUT_CART":
+      return {
+        cartItems: [],
+      };
+
     default:
       return state;
   }
@@ -101,6 +106,9 @@ export const CartProvider = ({ children }) => {
     },
     removeFromCart: (id) => {
       dispatch({ type: "REMOVE_FROM_CART", payload: { id } });
+    },
+    checkOutCart: () => {
+      dispatch({ type: "CHECKOUT_CART" });
     },
   };
 
