@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 const ImageCarousel = ({ product, className }) => {
   // falling back to a single image if no multiple images array exists
@@ -28,12 +29,14 @@ const ImageCarousel = ({ product, className }) => {
       {/* thumbnails for multiple images*/}
       <div className="flex sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto pr-2">
         {productImages.map((img, index) => (
-          <img
+          <Image
             key={index}
             src={img}
             alt={`${product.title} thumbnail ${index + 1}`}
             onClick={() => setCurrentIndex(index)}
-            className={`w-17 h-17 object-cover rounded-md cursor-pointer transition-all ${
+            height={100}
+            width={100}
+            className={`w-17 h-17 object-contain rounded-md cursor-pointer transition-all ${
               currentIndex === index
                 ? "border-2 border-gray-900"
                 : "border-transparent hover:border-gray-300"
@@ -44,10 +47,12 @@ const ImageCarousel = ({ product, className }) => {
 
       {/* Main Image */}
       <div className="relative flex-1">
-        <img
+        <Image
           src={selectedImage}
           alt={product.title}
-          className="w-full h-full aspect-square object-cover rounded-lg shadow-md"
+          height={1500}
+          width={1500}
+          className="w-full h-full aspect-square object-contain rounded-lg shadow-md"
         />
 
         {/* Navigation Buttons */}
