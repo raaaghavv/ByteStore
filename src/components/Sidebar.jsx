@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import { useFilter } from "@/context/FilterContext";
 import mockProducts from "@/data/products";
 
-const categories = [...new Set(mockProducts.map((prod) => prod.category))];
-const brands = [...new Set(mockProducts.map((prod) => prod.brand))];
-
 const Sidebar = () => {
   const {
     selectedCategories,
@@ -15,6 +12,18 @@ const Sidebar = () => {
     priceRange,
     setPriceRange,
   } = useFilter();
+
+  const categories = [...new Set(mockProducts.map((prod) => prod.category))];
+  const brands =
+    selectedCategories.length > 0
+      ? [
+          ...new Set(
+            mockProducts
+              .filter((prod) => selectedCategories.includes(prod.category))
+              .map((prod) => prod.brand)
+          ),
+        ]
+      : [];
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -61,22 +70,24 @@ const Sidebar = () => {
           />
           <p className="text-sm">Up to ${priceRange}</p>
         </div>
-        <div>
-          <h3 className="font-semibold mb-2">Brands</h3>
-          <div className="space-y-1">
-            {brands.map((brand) => (
-              <label key={brand} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="accent-white"
-                  checked={selectedBrands.includes(brand)}
-                  onChange={() => handleBrandChange(brand)}
-                />
-                {brand}
-              </label>
-            ))}
+        {brands.length > 0 && (
+          <div>
+            <h3 className="font-semibold mb-2">Brands</h3>
+            <div className="space-y-1">
+              {brands.map((brand) => (
+                <label key={brand} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    className="accent-white"
+                    checked={selectedBrands.includes(brand)}
+                    onChange={() => handleBrandChange(brand)}
+                  />
+                  {brand}
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </aside>
   );
