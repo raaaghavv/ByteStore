@@ -7,7 +7,7 @@ A modern, responsive e-commerce storefront built with Next.js and Tailwind CSS. 
 ## 🚀 Live Demo & Preview
 
 - [**Live Site**](https://bytes-store.vercel.app/)
-- [**Video Walkthrough**](https://www.loom.com/share/your-video-link)
+- [**Video Walkthrough**](https://youtu.be/KE9wjJIel68?feature=shared)
 
 ![E-Commerce Store Screenshot](/public/screenshot.png)
 _A screenshot of the main product listing page._
